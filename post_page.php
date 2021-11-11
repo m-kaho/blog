@@ -1,3 +1,11 @@
+<!-- 
+次にやる事
+1.入力内容が間違っているとき, 内容を全て消えないようにしておく
+2.投稿する時確認をとる 
+-->
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -18,6 +26,7 @@
     <input type="submit" name="add" value="投稿">
     </form>
     <?php
+        //投稿ボタンがクリックされた時
         if(isset($_POST['add'])){
             if(!isset($_POST["private"])){
                 $_POST["private"]="";
@@ -69,10 +78,13 @@
                         post(title, content, private)
                     VALUES
                         (:title, :content, :private)';
+            //userID
             $user = "postuser";
+            //PassWord
             $pass = "e2k2021";
         
             try{
+                //DBに接続
                 $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
                 // $dbh = null;
                 //var_dump($dbh);
@@ -81,6 +93,7 @@
                 $stmt->bindValue(':title',$title, PDO::PARAM_STR);
                 $stmt->bindValue(':content',$content, PDO::PARAM_STR);
                 $stmt->bindValue(':private',$private, PDO::PARAM_INT);
+                //DBに書き込み
                 $stmt->execute();
                 ?>
                 <script>
@@ -99,4 +112,5 @@
 
 </body>
 </html>
+
 
