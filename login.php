@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,6 +9,19 @@
     <title>login page</title>
 </head>
 <body>
+        <?php
+            //セッション変数を調べる
+            if(isset($_SESSION["isLogin"])){
+                $isLogin = $_SESSION["isLogin"];
+                $user = $_SESSION["user"];
+                //echo($isLogin);
+                //ログイン出ているか確かめる
+                if($isLogin == True){//Trueだった場合
+                    header( "Location: loginStatus.php" ) ;
+                }
+            }
+
+        ?>
     <form method="post" action="login.php">
     <h2>ユーザーネームを入力してください</h2>
     <input type="text" id="username" name="username">
@@ -79,8 +94,8 @@
                 <?php
                 die();
             }else{
-                // $_SESSION['user'] = $username;
-                // $_SESSION['isLogin'] = boolean(true);
+                $_SESSION['user'] = $username;
+                $_SESSION['isLogin'] = True;
                 header( "Location: loginStatus.php" ) ;
             }
         }
