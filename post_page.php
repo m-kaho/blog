@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!-- 
 次にやる事
 1.入力内容が間違っているとき, 内容を全て消えないようにしておく
@@ -15,17 +19,47 @@
     <title>PostPage</title>
 </head>
 <body>
-    <form method="post" action="post_page.php">
+    <?php
+        $contents = ("<form method='post' action='post_page.php'>
+        <h1>titleを入力してください</h1>
+        <input type='text' id='title' name='title'>
+        <h1>本文を入力して下さい</h1>
+        <input type='text' id='content' name='content'>
+        <br>
+        <input type='radio' name='private' value='1'/>公開
+        <input type='radio' name='private' value='2'/>非公開
+        </br>
+        <input type='submit' name='add' value='投稿'>
+        </form>");
+
+        //セッション変数を調べる
+        if(isset($_SESSION["isLogin"])){
+            $isLogin = $_SESSION["isLogin"];
+            $user = $_SESSION["user"];
+            //ログインしているか確かめる
+            if($isLogin == True){//ログインできている場合
+                echo ($contents);
+            }else{//ログインしていない場合
+                echo "ログインされていません<br>";
+                echo "<a href="."login.php".">ログイン</a>";
+            }
+        }else{//セッション何もなかった場合
+            echo"セッションエラーです<br>ログインしなおしてください<br>";
+            echo "<a href="."login.php".">ログイン</a>";
+        }
+        
+    ?>
+    <!-- <form method='post' action='post_page.php'>
     <h1>titleを入力してください</h1>
-    <input type="text" id="title" name="title">
+    <input type='text' id='title' name='title'>
     <h1>本文を入力して下さい</h1>
-    <input type="text" id="content" name="content">
+    <input type='text' id='content' name='content'>
     <br>
-    <input type="radio" name="private" value="1"/>公開
-    <input type="radio" name="private" value="2"/>非公開
+    <input type='radio' name='private' value='1'/>公開
+    <input type='radio' name='private' value='2'/>非公開
     </br>
-    <input type="submit" name="add" value="投稿">
-    </form>
+    <input type='submit' name='add' value='投稿'>
+    </form> -->
     <?php
         //投稿ボタンがクリックされた時
         if(isset($_POST['add'])){
@@ -73,7 +107,9 @@
                 <?php
                 exit();
             }
-            
+            ?>
+            <?php
+
             //sql文
             $sql =  'INSERT INTO
                         post(title, content, private)
