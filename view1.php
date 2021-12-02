@@ -69,8 +69,7 @@ if (!isset($_GET['page_num'])) {
     <?php endif; ?>
     <br>
     <?php 
-        $ken = $page * $by;
-        echo $ken.'件目/全'.$id_sum.'件' ;
+        '全'.$id_sum.'件' ;
     ?>
 </body>
 </html>
