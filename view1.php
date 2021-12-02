@@ -5,7 +5,7 @@ $user = "postuser";
 $pass = "2021";
 
 $pageNum = $_GET['page_num'] - 1;
-$by = 2;
+$by = 1;
 
 try {
     $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
@@ -49,14 +49,13 @@ if (!isset($_GET['page_num'])) {
     <button onclick="location.href='login.php'">ログイン</button>
     <?php foreach($result as $content): ?>
     <div>
-        <?php if ($content["private"] == 1): ?>
         <h2><a href="view2.php?post_id=<?= $content["post_id"] ?>"><?= $content["title"] ?></a></h2>
         <p>投稿日:<?= $content["post_date"] ?>,最終更新日:<?=$content["update_date"] ?></p>
         <p><?= $content["content"] ?></p>
-        <?php endif; ?>
     </div>
     <?php endforeach; ?>
     
+    <?php if($id_sum > $by): ?>
     <?php  if ($page > 1 && $page!=$max): ?>
     <a href="view1.php?page_num=<?php echo ($page-1); ?>">前へ</a>
     <a href="view1.php?page_num=<?php echo ($page+1); ?>">次へ</a>
@@ -67,6 +66,11 @@ if (!isset($_GET['page_num'])) {
     <?php  if ($page == 1): ?>
     <a href="view1.php?page_num=<?php echo ($page+1); ?>">次へ</a>
     <?php endif; ?>
-
+    <?php endif; ?>
+    <br>
+    <?php 
+        $ken = $page * $by;
+        echo $ken.'件目/全'.$id_sum.'件' ;
+    ?>
 </body>
 </html>
