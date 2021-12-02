@@ -69,7 +69,7 @@ if (!isset($_GET['page_num'])) {
     <?php endif; ?>
     <br>
     <?php 
-        '全'.$id_sum.'件' ;
+        echo '全'.$id_sum.'件' ;
     ?>
 </body>
 </html>
