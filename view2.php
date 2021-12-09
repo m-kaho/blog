@@ -1,6 +1,6 @@
 <?php
-
-$id = $_GET['post_id'];
+$id=1;
+//$id = $_GET['post_id'];
 
 if(empty($id)){
     exit('IDが不正です');
@@ -34,7 +34,9 @@ if(!$result){
     exit('このブログは非表示です');
 }
 
-
+// コメントデータを取得
+require_once("read_memofile.php");
+$commets = readComment();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,9 +52,29 @@ if(!$result){
     <p>投稿日時:<?=$result["post_date"] ?>,最終更新日:<?=$result["update_date"] ?>></p>
     <hr>
     <p>本文:<?php echo $result['content'] ?></p>
-    <p>コメント：</p>
+    <!-- <p>コメント：</p>
         <textarea name="content" id="content" cols="30" rows="10"></textarea>
         <br>
-    <button>コメントを残す</button>
+    <button>コメントする</button> -->
+    <div>
+        <form method ="POST" action="write_memofile.php">
+        
+                
+                <textarea name="memo" cols="25" rows="4" maxlength="100" placeholder="コメントする" required></textarea>
+                <br>
+                <input type="submit" type="submit" value="送信する">
+
+                
+        </form>
+
+    </div>
+
 </body>
 </html>
+<?php
+foreach($commets as $value){
+    // var_dump($value);
+    // echo("<br>");
+    echo"<li>".$value['datetime'].":".$value["text"]."</li>\n";
+}
+?>
