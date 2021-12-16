@@ -17,10 +17,10 @@
             $user = $_SESSION["user"];
             //ログインしているか確かめる
             if($isLogin == False){//ログインできていない場合
-                header( "Location: loginStatus.php" ) ;
+                header( "Location: login.php" ) ;
             }
         }else{//セッション何もなかった場合
-            header( "Location: loginStatus.php" ) ;
+            header( "Location: login.php" ) ;
         }
         
     ?>

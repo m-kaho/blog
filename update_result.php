@@ -2,6 +2,17 @@
     session_start();
 ?>
 <?php
+    if(isset($_SESSION["isLogin"])){
+        $isLogin = $_SESSION["isLogin"];
+        $user = $_SESSION["user"];
+        //ログインしているか確かめる
+        if($isLogin == False){//ログインできていない場合
+            header( "Location: login.php" ) ;
+        }
+    }else{//セッション何もなかった場合
+        header( "Location: login.php" ) ;
+    }  
+    
     if(isset($_SESSION["upId"])){
         if($_SESSION["upId"] == NULL){//ログインできていない場合
             header( "Location: view3.php?page_num=1" ) ;

@@ -2,8 +2,19 @@
     session_start();
 ?>
 <?php
+    if(isset($_SESSION["isLogin"])){
+        $isLogin = $_SESSION["isLogin"];
+        $user = $_SESSION["user"];
+        //ログインしているか確かめる
+        if($isLogin == False){//ログインできていない場合
+            header( "Location: login.php" ) ;
+        }
+    }else{//セッション何もなかった場合
+        header( "Location: login.php" ) ;
+    }  
+
     if(isset($_SESSION["postTitle"])){
-        if($_SESSION["postTitle"] == NULL){//ログインできていない場合
+        if($_SESSION["postTitle"] == NULL){//投稿していない
             header( "Location: post_page.php" ) ;
         }
         $title = $_SESSION["postTitle"];
