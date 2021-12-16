@@ -20,7 +20,7 @@
             if($isLogin == True){//ログインできている場合
                 echo ("<h2>".$user."さんのマイページ</h2>");
                 echo ("<a href="."post_page.php".">投稿画面へ</a><br>");
-                echo ("<a href="."update.php".">削除・更新画面へ</a>");
+                echo ("<a href="."view3.php?page_num=1".">削除・更新画面へ</a>");
             }else{//ログインしていない場合
                 echo ("ログインされていません<br>");
                 echo ("<a href="."login.php".">ログイン</a>");

@@ -1,125 +1,96 @@
 <?php
     session_start();
 ?>
-
-<!-- 
-次にやる事
-1.入力内容が間違っているとき, 内容を全て消えないようにしておく
-2.投稿する時確認をとる 
-3.Sessionを追加する
--->
-
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="post_page.css">
     <title>PostPage</title>
 </head>
 <body>
     <?php
-        $contents = ("<form method='post' action='post_page.php'>
-        <h1>titleを入力してください</h1>
-        <input type='text' id='title' name='title'>
-        <h1>本文を入力して下さい</h1>
-        <input type='text' id='content' name='content'>
-        <br>
-        <input type='radio' name='private' value='1'/>公開
-        <input type='radio' name='private' value='2'/>非公開
-        </br>
-        <input type='submit' name='add' value='投稿'>
-        </form>");
-
         //セッション変数を調べる
         if(isset($_SESSION["isLogin"])){
             $isLogin = $_SESSION["isLogin"];
             $user = $_SESSION["user"];
             //ログインしているか確かめる
-            if($isLogin == True){//ログインできている場合
-                echo ($contents);
-            }else{//ログインしていない場合
-                echo "ログインされていません<br>";
-                echo "<a href="."login.php".">ログイン</a>";
+            if($isLogin == False){//ログインできていない場合
+                header( "Location: loginStatus.php" ) ;
             }
         }else{//セッション何もなかった場合
-            echo"セッションエラーです<br>ログインしなおしてください<br>";
-            echo "<a href="."login.php".">ログイン</a>";
+            header( "Location: loginStatus.php" ) ;
         }
         
     ?>
-    <!-- <form method='post' action='post_page.php'>
-    <h1>titleを入力してください</h1>
-    <input type='text' id='title' name='title'>
-    <h1>本文を入力して下さい</h1>
-    <input type='text' id='content' name='content'>
-    <br>
-    <input type='radio' name='private' value='1'/>公開
-    <input type='radio' name='private' value='2'/>非公開
-    </br>
-    <input type='submit' name='add' value='投稿'>
-    </form> -->
-    <?php
-        //投稿ボタンがクリックされた時
-        if(isset($_POST['add'])){
-            if(!isset($_POST["private"])){
-                $_POST["private"]="";
+        <h1>投稿画面</h1>
+        <form id="post-form" method='post' action='post_page.php'>
+        <h2>タイトルを入力してください</h2>
+        <input type='text' id='title' name='title'>
+        <h2>本文を入力して下さい</h2>
+        <input type='text' id='content' name='content'>
+        <br>
+        <input type='radio' name='private' value='1' checked/>公開
+        <input type='radio' name='private' value='2'/>非公開
+        </br>
+        </form>
+        <button id='postBtn'>投稿</button>
+        <div id='alert'>
+        <p id='emptyTitle' class="hide">タイトルが空です</p>
+        <p id='lengthTitle' class="hide">タイトルを40文字以下にしてください</p>
+        <p id='emptyContent' class="hide">本文が空です</p>
+    </div>
+        <script>
+            const post = document.querySelector('#postBtn');
+            post.addEventListener('click', ()=> {
+                console.log("ボタン押された");
+                var title = document.getElementById('title').value;
+                var content = document.getElementById('content').value
+                let hideElement = document.querySelector('.show');
+                console.log(hideElement);
+            if(hideElement !== null){
+                hideElement.className = 'hide';
             }
-                $title = $_POST["title"];
-                $content = $_POST["content"];
-                $private = $_POST["private"];
-            //echo($title." ".$content." ".$private);
-            
-            //タイトルが空だった時
-            if(empty($title)){
-                ?>
-                <script>
-                    alert('タイトルを入力してください');
-                </script>
-                <?php
-                exit();
+            if(title == ""){
+                let element = document.querySelector('#emptyTitle');
+                element.className = 'show';
+                return;
             }
-            //内容がないとき
-            if(empty($content)){
-                ?>
-                <script>
-                    alert('内容を入力してください');
-                </script>
-                <?php
-                exit();
+            if(title.length > 40){
+                let element = document.querySelector('#lengthTitle');
+                element.className = 'show';
+                return;
             }
-            //公開か非公開か選んでいない時
-            if(empty($private)){
-                ?>
-                <script>
-                    alert('公開か非公開か選んでください');
-                </script>
-                <?php
-                exit();
+            if(content == ""){
+                let element = document.querySelector('#emptyContent');
+                element.className = 'show';
+                return;
             }
-            //タイトルが41文字以上の時
-            if(mb_strlen($title) > 40){
-                ?>
-                <script>
-                    alert('タイトルを40文字以下にしてください');
-                </script>
-                <?php
-                exit();
+            var result = window.confirm("投稿しますか？");
+            if(result){
+                const form = document.getElementById('post-form');
+                form.submit();
             }
-            ?>
-            <?php
 
+            }, false);
+        </script>
+
+    <?php
+    if($_POST){
+            $title = $_POST["title"];
+            $content = $_POST["content"];
+            $private = $_POST["private"];
             //sql文
             $sql =  'INSERT INTO
-                        post(title, content, private)
-                    VALUES
-                        (:title, :content, :private)';
+                post(title, content, private)
+            VALUES
+                (:title, :content, :private)';
             //userID
             $user = "postuser";
             //PassWord
             $pass = "e2k2021";
-        
+
             try{
                 //DBに接続
                 $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
@@ -132,18 +103,24 @@
                 $stmt->bindValue(':private',$private, PDO::PARAM_INT);
                 //DBに書き込み
                 $stmt->execute();
-                ?>
-                <script>
-                    alert("投稿完了しました");
-                </script>
-                <?php
+
+                $_SESSION['postTitle'] = $title;
+                $_SESSION['postContent'] = $content;
+                $_SESSION['postPrivate'] = $private;
+                header( "Location: post_result.php" ) ;
                 $dbh = null;
             }catch (PDOException $e){
                 print "エラー:".$e->getMessage()."</br>";
                 die();
-            }
+            }   
 
-        }
+    }
+
+
+
+
+        
+        
         
     ?>
 
