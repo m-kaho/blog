@@ -1,21 +1,41 @@
 <?php
-//phpinfo();
+    session_start();
+?>
+
+
+<?php
+//セッション変数を調べる(変更点)
+if(isset($_SESSION["isLogin"])){
+    $isLogin = $_SESSION["isLogin"];
+    $user = $_SESSION["user"];
+    //ログインしているか確かめる
+    if($isLogin == False){//ログインできていない場合
+        header( "Location: loginStatus.php" ) ;
+    }
+}else{//セッション何もなかった場合
+    header( "Location: loginStatus.php" ) ;
+}
+
 $title = "Mylog";
 $user = "postuser";
-$pass = "2021";
+$pass = "e2k2021";
+//もしURLにGETの変数がついていない場合(変更点)
+if($_GET['page_num']==NULL){
+    header( "Location: view3.php?page_num=1" ) ;
+}
 
 $pageNum = $_GET['page_num'] - 1;
-$by = 2;
+$by = 4;
 
 try {
     $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
     $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     //プリペアドステートメント
-    $stmt = $dbh->prepare('select * from blog order by post_id limit ?, ?');
+    $stmt = $dbh->prepare('select * from post order by post_id limit ?, ?');
     $stmt->execute(array($pageNum * $by, $by));
     $result = $stmt->fetchAll();
 
-    $count = $dbh->query('select count(post_id) from blog' );
+    $count = $dbh->query('select count(post_id) from post' );
     $cnt = $count->fetch(PDO::FETCH_NUM);
 
     $dbh = null;
@@ -53,6 +73,8 @@ if (!isset($_GET['page_num'])) {
         <h2><a href="view2.php?post_id=<?= $content["post_id"] ?>"><?= $content["title"] ?></a></h2>
         <p><?= $content["content"].'…' ?></p>
         <p>投稿日:<?= $content["post_date"] ?>,最終更新日:<?=$content["update_date"] ?></p>
+        <!-- 削除・更新画面へ移動する(変更点) -->
+        <a href="update.php?post_id=<?=$content["post_id"]?>">更新</a> <a href="delete.php?post_id=<?=$content["post_id"]?>">削除</a>
     </div>
     <?php endforeach; ?>
     
