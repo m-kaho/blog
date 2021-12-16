@@ -24,8 +24,16 @@ if($_POST) {
         $stmt->bindValue(':title',$title, PDO::PARAM_STR);
         $stmt->bindValue(':content',$content, PDO::PARAM_STR);
         $stmt->bindValue(':private',$private, PDO::PARAM_INT);
-    
+        
         $stmt->execute();
+
+        $_SESSION['upId'] = $id;
+        $_SESSION['upTitle'] = $title;
+        $_SESSION['upContent'] = $content;
+        $_SESSION['upPrivate'] = $private;
+
+        header("Location: update_result.php");
+
     } catch (PDOException $e) {
         print "エラー発生：".$e->getMessage()."</br>";
         die();
@@ -40,6 +48,7 @@ if($_POST) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="update.css">
     <title>更新画面</title>
 </head>
 <body>
@@ -122,23 +131,34 @@ if($_POST) {
     <!-- <input type="submit" name='update' value='更新'> -->
     </form>
     <button id="submitBtn">更新</button>
-    
-    <div>
+    <div id='alert'>
+        <p id='emptyTitle' class="hide">タイトルが空です</p>
+        <p id='lengthTitle' class="hide">タイトルを40文字以下にしてください</p>
+        <p id='emptyContent' class="hide">本文が空です</p>
+    </div>
 
     <script>
         const submit = document.querySelector('#submitBtn');
         submit.addEventListener('click', ()=> {
             var title = document.getElementById('title').value;
+            let hideElement = document.querySelector('.show');
+            console.log(hideElement);
+            if(hideElement !== null){
+                hideElement.className = 'hide';
+            }
             if(title == ""){
-                alert("titleが空です");
+                let element = document.querySelector('#emptyTitle');
+                element.className = 'show';
                 return;
             }
             if(title.length > 40){
-                alert("40文字以下です");
+                let element = document.querySelector('#lengthTitle');
+                element.className = 'show';
                 return;
             }
             if(document.getElementById('content').value == ""){
-                alert("contentが空です");
+                let element = document.querySelector('#emptyContent');
+                element.className = 'show';
                 return;
             }
             
@@ -148,6 +168,7 @@ if($_POST) {
             if(result) {
                 const form = document.getElementById('edit-form');
                 form.submit();
+
             }
         }, false);
     </script>
