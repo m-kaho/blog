@@ -18,7 +18,7 @@
             //ログインしているか確かめる
             if($isLogin == True){//ログインできている場合
                 echo "ログインできています<br>ようこそ".$user."さん<br>";
-                echo "<a href="."mypage.php".">マイページ</a>"
+                echo "<a href="."mypage.php".">マイページ</a>";
             }else{//ログインしていない場合
                 echo "ログインされていません<br>";
                 echo "<a href="."login.php".">ログイン</a>";
