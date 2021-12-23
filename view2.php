@@ -44,37 +44,47 @@ $commets = readComment();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view2.css"type="text/css">
     <title>ブログ詳細</title>
 </head>
 <body>
-    <!-- <h2><?php //echo $result['user'] ?>のブログ</h2> -->
-    <h3>タイトル:<?php echo $result['title'] ?></h3>
-    <p>投稿日時:<?=$result["post_date"] ?>,最終更新日:<?=$result["update_date"] ?>></p>
-    <hr>
-    <p>本文:<?php echo $result['content'] ?></p>
-    <!-- <p>コメント：</p>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <br>
-    <button>コメントする</button> -->
-    <div>
-        <form method ="POST" action="write_memofile.php">
-        
-                
-                <textarea name="memo" cols="25" rows="4" maxlength="100" placeholder="コメントする" required></textarea>
-                <br>
-                <input type="submit" type="submit" value="送信する">
+   <header>
+   <img src="logo/logo2.png">
+    <nav>
+        <ul class="clearfix">
+            <a class="view1" href="view1.php?page_num=<?php echo $page; ?>">閲覧画面</a>
+            <a class="login" href="login.php">ログイン</a>
+        </ul>
+    </nav>
+   </header>
+   <div class="main">
+        <!-- <h2><?php //echo $result['user'] ?>のブログ</h2> -->
+        <h2><?php echo $result['title'] ?></h2>
+        <p id="time">投稿日時:<?=$result["post_date"] ?>,最終更新日:<?=$result["update_date"] ?></p>
+        <p id="main"><?php echo $result['content'] ?></p>
+        <form method ="POST" action="write_memofile.php">            
+            <textarea name="memo" cols="30" rows="5" maxlength="100" placeholder="コメントする" required></textarea>
+            <br>
+            <input type="submit" type="submit" value="送信する">            
+       </form>
 
-                
+
+        <form method ="POST" action="write_memofile.php">       
+            <?php
+                foreach($commets as $value){
+                    // var_dump($value);
+                    // echo("<br>");
+                    echo"<li>".$value['datetime'].":".$value["text"]."</li>\n";
+                }
+            ?>  
+
         </form>
 
     </div>
-
+<footer>
+<p id="copy">
+    &copy;beginner's
+</p>
+</footer>
 </body>
 </html>
-<?php
-foreach($commets as $value){
-    // var_dump($value);
-    // echo("<br>");
-    echo"<li>".$value['datetime'].":".$value["text"]."</li>\n";
-}
-?>
