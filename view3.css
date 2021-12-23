@@ -1,0 +1,104 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+html{
+    height: 100%;
+    font-family: 'M PLUS 1p', sans-serif;
+}
+body{
+    display: flex;
+    flex-flow: column;
+}
+/* ヘッダー */
+header{
+    height: 80px;
+    width:100%;
+    background-color: #ffffff;
+    position:fixed;
+    top:0px;
+}
+header img{
+    width:180px;
+    position:fixed;
+}
+.view3{
+    width:15%;
+    margin:20px;
+    background-color:#f8a065;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 150px;
+    position:absolute;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
+.login{
+    width:15%;
+    margin:20px;
+    background-color:#f8a065;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 3px;
+    float:right;
+    margin:0px 30px;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+
+}
+
+/* 閲覧画面③ */
+.contents{
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom:20px;
+    background-color: #fff1a454;
+}
+.page{
+    font-size:40px;
+    color: #fd7755;
+    border-bottom: dashed 2px #fd7755;
+}
+.title:link{
+    color: #f8a065;
+    text-decoration:none;
+}
+.title:visited{
+    color: #f8a065;
+    text-decoration:none;
+}
+.title:hover {
+    color: #f1436f;
+    text-decoration:none;
+  }
+.title:active {
+    color: #f1436f;
+    text-decoration:none;
+  }
+.content{
+    color: #747272;
+}
+.date{
+    color: #747272;
+    border-bottom:1px solid #fd7755;
+    padding-bottom: 20px;
+}
+
+
+/* フッター */
+footer{
+    box-sizing: border-box;
+    height: 50px;
+    width:100%;
+    background-color:#918d8b;
+    color:white;
+    bottom:0;
+    /* position:absolute;
+    bottom:0; */
+}
+#copy{
+    margin:10px;
+    float:right;
+}
