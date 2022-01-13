@@ -30,14 +30,15 @@ $id = $_GET['post_id'];
 if(isset($_SESSION["isLogin"])){
     $isLogin = $_SESSION["isLogin"];
     $user = $_SESSION["user"];
+    $sUserid = $_SESSION["userid"];
     //ログインしているか確かめる
     if($isLogin == False){//ログインできていない場合
-        header( "Location: loginStatus.php" ) ;
+        header( "Location: login.php" ) ;
     }
 }else{//セッション何もなかった場合
-    header( "Location: loginStatus.php" ) ;
+    header( "Location: login.php" ) ;
 }
-        
+
 //データベースから投稿内容を取ってくる
 try {
     $dbh = dbConnect();
@@ -54,6 +55,13 @@ try {
     print "エラー発生：".$e->getMessage()."</br>";
     die();
 }
+//投稿者のIDとセッションのIDが同じか
+if($data['userid'] != $sUserid){
+    header( "Location: view3.php?page_num=1&userid=".$sUserid ) ;
+}
+
+
+
 
 //削除する
 if($_POST) {
@@ -82,9 +90,19 @@ if($_POST) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="delete.css" rel="stylesheet" type=text/css>
     <title>更新画面</title>
 </head>
 <body>
+    <header>
+        <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=<?php echo $page; ?>">閲覧画面</a>
+                <a class="login" href="login.php">ログイン</a>
+            </ul>
+        </nav>
+    </header>
     <form id="delete-form" method='post' action="delete.php?post_id=<?=$id?>">
     <input type="hidden" value="<?=$id?>" name="post_id">
     </form>
@@ -94,28 +112,18 @@ if(!$data){
     return;
 }
 ?>
+<div class="contents">
     <h1>本当に削除しますか？</h1>
-    <h2><?=$data['title']?></h2>
-    <h3><?=$data['content']?></h3>
-    <h3?>公開状態</h3>
-    <?php
-        if($data['private'] == 1){
-            //echo('公開だよ');
-            echo('<h3>公開</h3>');
-        }else{
-            //echo("非公開だよ");
-            echo('<h3>非公開</h3>');
-        }
-    ?>
     <br>
-    <a href="view3.php?page_num=1">戻る</a>
+    <a href="view3.php?page_num=1" class="NoBtn">戻る</a>
     <button id="deleteBtn">削除</button>
-    
-    <div>
+</div>
 
+    
     <script>
         const submit = document.querySelector('#deleteBtn');
         submit.addEventListener('click', ()=> {
+            console.log("クリックされた");
             const form = document.getElementById('delete-form');
             form.submit();
         }, false);
