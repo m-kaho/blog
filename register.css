@@ -1,0 +1,69 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+html{
+    height: 100%;
+    font-family: 'M PLUS 1p', sans-serif;
+    background-color: #fff1a454;
+}
+body{
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+}
+header{
+    box-sizing: content-box;
+    height: 80px;
+    width:100%;
+    background-color: #ffffff;
+    position:fixed;
+    top:0px;
+}
+.logoImage{
+    width:180px;
+    position:fixed;
+}
+#contents{
+    margin: 200px auto 0 auto;
+    margin-top: 100px;
+    border: lightblue;
+}
+input{
+    width: 900px;
+    height: 50px;
+    margin-bottom: 25px;
+}
+
+button{
+    width: 200px;
+    margin:15px auto 0 auto;
+    display: block;
+    background-color: rgb(255, 166, 0);
+    color: white;
+    border-radius: 4px;
+    padding: 8px 24px;
+    border: solid 4px rgb(255, 166, 0);
+}
+
+button:hover{
+    width: 200px;
+    margin:15px auto 0 auto;
+    display: block;
+    background-color: rgb(226, 147, 0);
+    color: white;
+    border-radius: 4px;
+    padding: 8px 24px;
+    border: solid 4px rgb(226, 147, 0);
+}
+
+#alert{
+    color: red;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+
+}
