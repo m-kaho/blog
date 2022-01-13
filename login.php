@@ -9,7 +9,7 @@ if(isset($_SESSION["isLogin"])){
     //echo($isLogin);
     //ログイン出ているか確かめる
     if($isLogin == True){//Trueだった場合
-        header( "Location: loginStatus.php" ) ;
+        header( "Location: mypage.php" ) ;
     }
 }
 
@@ -39,16 +39,17 @@ if(isset($_SESSION["isLogin"])){
         <h1>ログイン</h1>
         <form id='login-form' method="post" action="login.php">
         <div class="inputForm">
-            <input type="text" id="username" name="username" placeholder="ログインID"><br>
+            <input type="text" id="address" name="address" placeholder="メールアドレス"><br>
             <input type="password" id="password" name="password" placeholder="パスワード">
         </div>
         <div id=alert>
-            <p id='emptyUsername' class='hide'>ユーザーネームを入力して下さい</p>
+            <p id='emptyAddress' class='hide'>メールアドレスを入力して下さい</p>
             <p id='emptyPassword' class='hide'>パスワードを入力してください</p>
-            <p id='different' class='hide'>ユーザーネームかパスワードが間違っています</p>
+            <p id='different' class='hide'>メールアドレスかパスワードが間違っています</p>
         </div>
         </form>
         <button id="loginBtn">ログイン</button>
+        <a href="register.php">新規登録はこちらから</a>
     </div>
     <footer>
         <p id="copy">&copy;beginner's</p>
@@ -57,14 +58,14 @@ if(isset($_SESSION["isLogin"])){
     <script>
         const submit = document.querySelector('#loginBtn');
         submit.addEventListener('click', ()=> {
-            var username = document.getElementById('username').value;
+            var username = document.getElementById('address').value;
             var password = document.getElementById('password').value;
             let hideElement = document.querySelector('.show');
             if(hideElement !== null){
                 hideElement.className = 'hide';
             }
             if(username == ""){
-                let element = document.querySelector('#emptyUsername');
+                let element = document.querySelector('#emptyAddress');
                 element.className = 'show';
                 return;
             }
@@ -82,17 +83,17 @@ if(isset($_SESSION["isLogin"])){
 if($_POST){
     // echo("押されたよ");
     $data = [];
-    $username = $_POST["username"];
+    $address = $_POST["address"];
     $password = $_POST["password"];
     try {
         //userID
         $user = "postuser";
         //PassWord
         $pass = "e2k2021";
-        $sql = 'SELECT * FROM user WHERE username = :username';
+        $sql = 'SELECT * FROM user WHERE address = :address';
         $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':address', $address, PDO::PARAM_STR);
         $stmt->execute();
         $data = $stmt->fetch();
         //var_dump($data);
@@ -123,7 +124,8 @@ if($_POST){
         <?php
         die();
     }else{
-        $_SESSION['user'] = $username;
+        $_SESSION['userid'] = $data['userid'];
+        $_SESSION['user'] = $data['username'];
         $_SESSION['isLogin'] = True;
         header( "Location: mypage.php" ) ;
     }
