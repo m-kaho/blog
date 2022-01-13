@@ -1,7 +1,23 @@
 <?php
     session_start();
 ?>
+<link rel="stylesheet" href="mypage.css">
+<?php
+// if(isset($_SESSION["isLogin"])){
+//     $isLogin = $_SESSION["isLogin"];
+//     $user = $_SESSION["user"];
+//     $userid = $_SESSION['userid'];
+//     //ログインしているか確かめる
+//     if($isLogin == False){//ログインできていない場合
+//         header( "Location: login.php" ) ;
+//     }
+// }else{//セッション何もなかった場合
+//     header( "Location: login.php" ) ;
+// }      
+require("checkLogin.php");
 
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,25 +27,27 @@
     <title>my page</title>
 </head>
 <body>
-    <?php
-        //セッション変数を調べる
-        if(isset($_SESSION["isLogin"])){
-            $isLogin = $_SESSION["isLogin"];
-            $user = $_SESSION["user"];
-            //ログインしているか確かめる
-            if($isLogin == True){//ログインできている場合
-                echo ("<h2>".$user."さんのマイページ</h2>");
-                echo ("<a href="."post_page.php".">投稿画面へ</a><br>");
-                echo ("<a href="."view3.php?page_num=1".">削除・更新画面へ</a>");
-            }else{//ログインしていない場合
-                echo ("ログインされていません<br>");
-                echo ("<a href="."login.php".">ログイン</a>");
-            }
-        }else{//セッション何もなかった場合
-            echo ("セッションエラーです<br>ログインしなおしてください<br>");
-            echo ("<a href="."login.php".">ログイン</a>");
-        }
+    <header>
+        <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <?php
+                    echo($log);
+                ?>
+                
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="main">
+        <h1>ようこそ!<?php echo $user?>さん</h1>
+        <a class="btn" href="post_page.php">投稿画面</a><br>
+        <a class="btn" href="view3.php?page_num=1&userid=".$sUserid>削除・編集画面</a><br>
+        <a class="btn" href="#">日記画面</a>
+    </div>
+    <footer>
         
-    ?>
+    </footer>
 </body>
 </html>
