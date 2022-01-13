@@ -12,7 +12,7 @@ if(isset($_SESSION["isLogin"])){
 }    
 
 if(isset($_SESSION["isLogin"])){
-    $log = '<a class="login"href="logout.php">ログアウト</a>';
+    $log = '<a class="login" href="logout.php">ログアウト</a>';
 }else{
     $log = '<a class="login" href="login.php">ログイン</a>';
 }

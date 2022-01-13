@@ -3,20 +3,7 @@
 ?>
 <link rel="stylesheet" href="post.css">
     <?php
-        //セッション変数を調べる
-        if(isset($_SESSION["isLogin"])){
-            $isLogin = $_SESSION["isLogin"];
-            $user = $_SESSION["user"];
-            
-
-            //ログインしているか確かめる
-            if($isLogin == False){//ログインできていない場合
-                header( "Location: login.php" ) ;
-            }
-        }else{//セッション何もなかった場合
-            header( "Location: login.php" ) ;
-        }
-        
+        require("checkLogin.php");
     ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -28,6 +15,14 @@
 <body>
     <header>
         <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <?php
+                    echo($log);
+                ?>
+            </ul>
+        </nav>
     </header>
     <div id='contents'>
         <form id="post-form" method='post' action='post_page.php'>

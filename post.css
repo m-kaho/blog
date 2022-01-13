@@ -1,0 +1,121 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+html{
+    height: 100%;
+    font-family: 'M PLUS 1p', sans-serif;
+    background-color: #fff1a454;
+}
+body { 
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+ }
+
+header{
+    box-sizing: content-box;
+    height: 80px;
+    width:100%;
+    background-color: #ffffff;
+    position:fixed;
+    top:0px;
+}
+
+
+.logoImage{
+    width:180px;
+    position:fixed;
+}
+.view1{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 150px;
+    position:absolute;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
+.login{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 3px;
+    float:right;
+    margin:0px 30px;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
+#alert{
+    color: red;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: flex;
+}
+#contents{
+    margin: 200px auto 0 auto;
+    margin-top: 100px;
+    border: lightblue;
+    /* background-color: white; */
+
+}
+.post input{
+    width: 900px;
+}
+.post textarea{
+    width: 903px;
+}
+#title{
+    height: 50px;
+    margin-bottom: 50px;
+}
+#content{
+    padding: 0px;
+}
+button{
+    width: 200px;
+    margin:15px auto 0 auto;
+    display: block;
+    background-color: rgb(255, 166, 0);
+    color: white;
+    border-radius: 4px;
+    padding: 8px 24px;
+    border: solid 4px rgb(255, 166, 0);
+}
+
+button:hover{
+    width: 200px;
+    margin:15px auto 0 auto;
+    display: block;
+    background-color: rgb(226, 147, 0);
+    color: white;
+    border-radius: 4px;
+    padding: 8px 24px;
+    border: solid 4px rgb(226, 147, 0);
+}
+
+footer{
+    justify-content: space-between;
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+    box-sizing: border-box;
+    height: 50px;
+    width:100%;
+    background-color:#ff9900;
+    color:white;
+}
+#copy{
+    margin:10px;
+    float:right;
+}
