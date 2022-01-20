@@ -1,17 +1,10 @@
 <?php
     session_start();
 ?>
+<link rel="stylesheet" href="update.css">
+
 <?php
-    if(isset($_SESSION["isLogin"])){
-        $isLogin = $_SESSION["isLogin"];
-        $user = $_SESSION["user"];
-        //ログインしているか確かめる
-        if($isLogin == False){//ログインできていない場合
-            header( "Location: login.php" ) ;
-        }
-    }else{//セッション何もなかった場合
-        header( "Location: login.php" ) ;
-    }  
+    require("checkLogin.php");
     
     if(isset($_SESSION["upId"])){
         if($_SESSION["upId"] == NULL){//ログインできていない場合
@@ -28,7 +21,7 @@
         unset($_SESSION["upPrivate"]);
 
     }else{//セッション何もなかった場合
-        header( "Location: view3.php?page_num=1" ) ;
+        //header( "Location: view3.php?page_num=1" ) ;
     }
 ?>
 <!DOCTYPE html>
@@ -40,19 +33,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>以下の内容で更新しました</h2>
-    <h3>タイトル</h3>
-    <p><?=$title?></p>
-    <h3>本文</h3>
-    <p><?=$content?></p>
-    <h3>公開状態</h3>
-    <?php
-    if($private == 1){
-        echo("<p>公開</p>");
-    }else{
-        echo("<p>非公開</p>"); 
-    }
-    ?>
-    <a href="view3.php?page_num=1">戻る</a>
+    <header>
+        <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <?php
+                    echo($log);
+                ?>
+            </ul>
+        </nav>
+    </header>
+    <div class="main">
+        <h2>更新しました</h2>
+        <a class="btn" href="view3.php?page_num=1">戻る</a>
+    </div>
+
 </body>
 </html>
