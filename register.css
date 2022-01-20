@@ -22,6 +22,33 @@ header{
     width:180px;
     position:fixed;
 }
+.view1{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 150px;
+    position:absolute;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
+.login{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 3px;
+    float:right;
+    margin:0px 30px;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
 #contents{
     margin: 200px auto 0 auto;
     margin-top: 100px;

@@ -4,6 +4,7 @@
 
 
 <?php
+
 if(isset($_SESSION["isLogin"])){
     $isLogin = $_SESSION["isLogin"];
     $user = $_SESSION["user"];
@@ -57,11 +58,17 @@ function getUserData($address){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="register.css" rel="stylesheet" type=text/css>
-    <title>Document</title>
+    <title>登録画面</title>
 </head>
 <body>
     <header>
         <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <a class="login" href="login.php">ログイン</a>
+            </ul>
+        </nav>
     </header>
     <div id='contents'>
         <form id="register-form" method="post" action="register.php">
