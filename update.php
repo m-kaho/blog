@@ -4,6 +4,7 @@
 ?>
 
 <?php
+require("checkLogin.php");
 //データベースに接続する関数
 function dbConnect(){
     $user = 'postuser';
@@ -17,19 +18,6 @@ function dbConnect(){
         die();
     }
     return $dbh;
-}
-
-//セッション変数を調べる
-if(isset($_SESSION["isLogin"])){
-     $isLogin = $_SESSION["isLogin"];
-    $user = $_SESSION["user"];
-    $sUserid = $_SESSION["userid"];
-    //ログインしているか確かめる
-    if($isLogin == False){//ログインできていない場合
-        header( "Location: login.php" ) ;
-    }
-}else{//セッション何もなかった場合
-    header( "Location: login.php" ) ;
 }
 
 //もしGETのidが不正だった場合
@@ -85,6 +73,14 @@ if($_POST) {
 <body>
     <header>
         <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <?php
+                    echo($log);
+                ?>
+            </ul>
+        </nav>
     </header>
     <?php
         try {
@@ -147,9 +143,9 @@ if($_POST) {
             <p id='lengthTitle' class="hide">タイトルを40文字以下にしてください</p>
             <p id='emptyContent' class="hide">本文が空です</p>
         </div>
-        <div class="btn">
+        
             <button id="submitBtn">更新</button>
-        </div>
+       
     </div>
 
     <script>
