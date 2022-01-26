@@ -2,6 +2,7 @@
     session_start();
 ?>
 <?php
+require("checkLogin.php");
 //DBに接続するための関数
 function dbConnect(){
      $user = 'postuser';
@@ -99,7 +100,9 @@ if($_POST) {
         <nav>
             <ul class="clearfix">
                 <a class="view1" href="view1.php?page_num=<?php echo $page; ?>">閲覧画面</a>
-                <a class="login" href="login.php">ログイン</a>
+                <?php
+                    echo($log);
+                ?>
             </ul>
         </nav>
     </header>
