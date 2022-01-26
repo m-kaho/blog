@@ -1,0 +1,70 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+html{
+    height: 100%;
+    font-family: 'M PLUS 1p', sans-serif;
+    background-color: #fff1a454;
+}
+body{
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+}
+header{
+    box-sizing: content-box;
+    height: 80px;
+    width:100%;
+    background-color: #ffffff;
+    position:fixed;
+    top:0px;
+}
+.view1{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 150px;
+    position:absolute;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
+.login{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    text-align:center;
+    padding:7px;
+    box-sizing:border-box;
+    margin:0px 3px;
+    float:right;
+    margin:0px 30px;
+    color:white;
+    text-decoration-line:none;
+    font-size:20px;
+}
+.logoImage{
+    width:180px;
+    position:fixed;
+}
+.main{
+    margin-top: 80px;
+}
+.main h1{
+    color: #fd7755;
+}
+.box{
+    display: inline-block;
+    width:200px;
+}
+.pvRanking{
+    text-align: center;
+}
+.recentPosts{
+    text-align: center;
+}
+h1{
+    text-align: center;
+}
