@@ -91,7 +91,11 @@ function getUserData($address){
         </div>
         <button id="registerBtn">新規登録</button>
     </div>
- 
+    <footer>
+    <p id="copy">
+        &copy;beginner's
+    </p>
+    </footer>
 </body>
 </html>
 <script>
