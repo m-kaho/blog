@@ -1,14 +1,40 @@
 <?php
+session_start();
+?>
+<?php
+require('checkLogin.php');
 //phpinfo();
 $title = "Mylog";
-$user = "20mk01";
-$pass = "2021";
+$user = "postuser";
+$pass = "e2k2021";
 
 $pageNum = $_GET['page_num'] - 1;
 $by = 4;
 
 $userId = $_GET['userid'];
-
+if($userId != $sUserid){
+    header( "Location: view4.php?page_num=1&userid=".$sUserid ) ;
+}
+function getUserData($userid){
+    try {
+        $user = "postuser";
+        $pass = "e2k2021";
+        $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
+        $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        $sql = 'SELECT username FROM user WHERE userid = :id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue('id',(int)$userid,PDO::PARAM_INT);
+        $stmt->execute();
+        $username = $stmt->fetch();
+        $dbh = NULL;
+        // var_dump($username);
+        $dbh = null;
+        return $username;
+    } catch (PDOException $e) {
+        print "エラー発生：".$e->getMessage()."</br>";
+        die();
+    }
+}
 try {
     $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
     $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -55,12 +81,16 @@ if (!isset($_GET['page_num'])) {
     <nav>
         <ul class="clearfix">
             <a class="view1" href="main.php">メインページ</a>
-            <a class="login" href="login.php">ログイン</a>
+            <?php echo($log);?>
         </ul>
     </nav>
 </header>
 <div class=contents>
-    <p class="page"><span style="color:gray">[日記モード]</span><br><?= $user ?>さんのブログ</p>
+    <?php
+        $username = getUserData($userId);
+        //var_dump($username);
+    ?>
+    <p class="page"><span style="color:gray">[日記モード]</span><br><?= $username['username'] ?>さんのブログ</p>
     <?php foreach($result as $content): ?>
     <div>
         <h2><a class="title" href="view2.php?post_id=<?= $content["post_id"] ?>"><?= $content["title"] ?></a></h2>
@@ -91,4 +121,3 @@ if (!isset($_GET['page_num'])) {
 </footer>
 </body>
 </html>
-
