@@ -95,7 +95,22 @@ function searchUser(){
             </ul>
         </nav>
     </header>
+    <div>
     <div class="main">
+        <br><h1>"Mylog"<span style="color:gray">とは？</span></h1>
+        <h4>
+            Mylogとは、誰でも<span style="color:#f8a065">気軽に・簡単に</span>ブログを作成し・投稿できるサービスです。<br>
+        </h4>
+        <br>
+        <h2>            
+        <span style="color:gray">今すぐ</span>Mylog<span style="color:gray">を始めよう！</span><br>
+        </h2>
+        <h4>
+            <a class="register" href="register.php">新規登録</a>
+        </h4>
+        <br>
+        <p class="none"> </p>
+        <br>
         <h1>最近の投稿</h1>
         <?php
         //ループのカウント
