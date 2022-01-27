@@ -53,7 +53,29 @@ header{
     margin-top: 80px;
 }
 .main h1{
-    color: #fd7755;
+    color: #f8a065;
+}
+.main h2{
+    text-align: center;
+    color:#f8a065;
+}
+.main h4{
+    text-align: center;
+    color:gray;
+}
+.register{
+    width:15%;
+    margin:20px;
+    background-color:#f7ae7e;
+    padding:10px 20px;
+    box-sizing:border-box;
+    margin:0px 3px;
+    color:white;
+    text-decoration-line:none;
+    font-size:30px;
+}
+.none{
+    border-bottom: solid 1px #fd7755;
 }
 .box{
     display: inline-block;
@@ -71,8 +93,6 @@ h1{
 /* フッター */
 footer{
     justify-content: space-between;
-    position: absolute;/*←絶対位置*/
-    bottom: 0; /*下に固定*/
     box-sizing: border-box;
     height: 50px;
     width:100%;
