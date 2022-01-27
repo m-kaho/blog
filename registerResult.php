@@ -16,6 +16,10 @@
         <h1>登録できました</h1>
         <a href="login.php">ログイン</a>
     </div>
-
+    <footer>
+    <p id="copy">
+        &copy;beginner's
+    </p>
+    </footer>
 </body>
 </html>
