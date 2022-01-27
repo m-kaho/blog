@@ -1,8 +1,6 @@
 <?php
 if(isset($_SESSION["isLogin"])){
     $isLogin = $_SESSION["isLogin"];
-    $user = $_SESSION["user"];
-    $sUserid = $_SESSION['userid'];
     //ログインしているか確かめる
 }
 
