@@ -183,5 +183,10 @@ if($_POST) {
             }
         }, false);
     </script>
+    <footer>
+    <p id="copy">
+        &copy;beginner's
+    </p>
+    </footer>
 </body>
 </html>
