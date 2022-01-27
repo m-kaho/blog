@@ -127,8 +127,10 @@
 
     }
     ?>
-    <!-- <footer>
-        <p id="copy">&copy;beginner's</p>
-    </footer> -->
+    <footer>
+        <p id="copy">
+            &copy;beginner's
+        </p>
+    </footer>
 </body>
 </html>
