@@ -142,6 +142,12 @@ function searchUser(){
         ?>
         </div>
     </div>
+    
+    <footer>
+    <p id="copy">
+        &copy;beginner's
+    </p>
+    </footer>
 
 </body>
 </html>
