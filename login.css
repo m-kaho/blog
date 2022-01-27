@@ -115,6 +115,7 @@ button:active{
     font-size: 15px;
 }
 
+/* フッター */
 footer{
     justify-content: space-between;
     position: absolute;/*←絶対位置*/
@@ -122,11 +123,8 @@ footer{
     box-sizing: border-box;
     height: 50px;
     width:100%;
-    background-color:#ff9900;
-    color:white;
-    /* position:absolute;
-    bottom:0; */
-}
+    background-color:#918d8b;
+    color:white;}
 #copy{
     margin:10px;
     float:right;
