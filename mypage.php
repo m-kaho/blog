@@ -46,8 +46,10 @@ require("checkLogin.php");
         <a class="btn" href="view3.php?page_num=1&userid=".$sUserid>削除・編集画面</a><br>
         <a class="btn" href="#">日記画面</a>
     </div>
-    <footer>
-        
+     <footer>
+    <p id="copy">
+        &copy;beginner's
+    </p>
     </footer>
 </body>
 </html>
