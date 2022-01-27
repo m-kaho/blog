@@ -131,5 +131,10 @@ if(!$data){
             form.submit();
         }, false);
     </script>
+<footer>
+<p id="copy">
+    &copy;beginner's
+</p>
+</footer>
 </body>
 </html>
