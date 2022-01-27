@@ -1,19 +1,10 @@
 <?php
     session_start();
 ?>
+<link rel="stylesheet" href="post_result.css">
 <?php
-    if(isset($_SESSION["isLogin"])){
-        $isLogin = $_SESSION["isLogin"];
-        $user = $_SESSION["user"];
-        $sUserid = $_SESSION["userid"];
-        //ログインしているか確かめる
-        if($isLogin == False){//ログインできていない場合
-            header( "Location: login.php" ) ;
-        }
-    }else{//セッション何もなかった場合
-        header( "Location: login.php" ) ;
-    }  
-
+    require("checkLogin.php");
+    
     if(isset($_SESSION["postTitle"])){
         if($_SESSION["postTitle"] == NULL){//投稿していない
             header( "Location: post_page.php" ) ;
@@ -39,10 +30,21 @@
     <title>PostResult</title>
 </head>
 <body>
+    <header>
+        <img src="logo/logo2.png" class="logoImage">
+        <nav>
+            <ul class="clearfix">
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <?php
+                    echo($log);
+                ?>
+            </ul>
+        </nav>
+    </header>
     <div class="container">
         <h2>投稿できました</h2>
-        <a href="view1.php?page_num=1&userid=".$sUserid>投稿を見に行く</a>
-        <a href="post_page.php">戻る</a>
+        <a class="btn" href="post_page.php">戻る</a>
+        <a class="btn" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">投稿を見に行く</a>
     </div>
 
 </body>
