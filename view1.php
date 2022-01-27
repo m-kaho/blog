@@ -2,6 +2,7 @@
     session_start();
 ?>
 <?php
+error_reporting(0);
 //phpinfo();
 require('headerLogin.php');
 $title = "Mylog";
@@ -12,6 +13,15 @@ $pageNum = $_GET['page_num'] - 1;
 $by = 4;
 
 $userId = $_GET['userid'];
+
+if(empty($_GET['page_num'])){
+    exit('ページが存在しません');
+}
+
+if(empty($_GET['userid'])){
+    exit('ページが存在しません');
+}
+
 function getUserData($userid){
     try {
         $user = "postuser";
