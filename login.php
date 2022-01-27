@@ -131,5 +131,10 @@ if($_POST){
     }
 }
 ?>
+    <footer>
+    <p id="copy">
+        &copy;beginner's
+    </p>
+    </footer>
 </body>
 </html>
