@@ -1,21 +1,10 @@
 <?php
     session_start();
 ?>
-
+<link rel="stylesheet" href="view3.css">
 
 <?php
-//セッション変数を調べる(変更点)
-if(isset($_SESSION["isLogin"])){
-    $isLogin = $_SESSION["isLogin"];
-    $user = $_SESSION["user"];
-    $sUserid = $_SESSION["userid"];
-    //ログインしているか確かめる
-    if($isLogin == False){//ログインできていない場合
-        header( "Location: loginStatus.php" ) ;
-    }
-}else{//セッション何もなかった場合
-    header( "Location: loginStatus.php" ) ;
-}
+require('checkLogin.php');
 
 
 //phpinfo();
@@ -31,7 +20,26 @@ $by = 4;
 if($userId != $sUserid){
     header( "Location: view3.php?page_num=1&userid=".$sUserid ) ;
 }
-
+function getUserData($userid){
+    try {
+        $user = "postuser";
+        $pass = "e2k2021";
+        $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
+        $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        $sql = 'SELECT username FROM user WHERE userid = :id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue('id',(int)$userid,PDO::PARAM_INT);
+        $stmt->execute();
+        $username = $stmt->fetch();
+        $dbh = NULL;
+        // var_dump($username);
+        $dbh = null;
+        return $username;
+    } catch (PDOException $e) {
+        print "エラー発生：".$e->getMessage()."</br>";
+        die();
+    }
+}
 try {
     $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
     $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -78,12 +86,16 @@ if (!isset($_GET['page_num'])) {
     <nav>
         <ul class="clearfix">
             <a class="view3" href="view1.php?page_num=<?php echo $page; ?>&userid=<?php echo $userId; ?>">閲覧画面</a>
-            <a class="login" href="login.php">ログイン</a>
+            <?php echo($log)?>
         </ul>
     </nav>
 </header>
 <div class=contents>
-    <p class="page"><?= $user ?>のブログ</p>
+    <?php
+        $username = getUserData($userId);
+        // var_dump($username);
+    ?>
+    <p class="page"><?= $username['username'] ?>のブログ</p>
     <?php foreach($result as $content): ?>
     <div>
         <h2><a class="title" href="view2.php?post_id=<?= $content["post_id"] ?>"><?= $content["title"] ?></a></h2>
