@@ -50,6 +50,47 @@ function getUserData($address){
 //ログインしていた時の処理
 
 ?>
+<?php
+if($_POST){
+    //echo("ポスト飛んできた");
+    $data = [];
+    $address = $_POST['address'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $data = getUserData($address);
+    //var_dump($data);
+    if(!$data){
+        try {
+            $dbh = dbConnect();
+            $sql = 'INSERT INTO 
+                    user(username, password, address)
+                VALUES
+                    (:username, :password, :address)';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':username',$username, PDO::PARAM_STR);
+            $stmt->bindValue(':password',$password, PDO::PARAM_STR);
+            $stmt->bindValue(':address',$address, PDO::PARAM_STR);
+
+            $stmt->execute();
+            $dbh = null;
+
+            header("Location:registerResult.php");
+        } catch (PDOException $e) {
+            print "エラー:".$e->getMessage()."</br>";
+            die();
+        }
+        die();
+    }else{
+        ?>
+        <script>
+            let element = document.querySelector('#alreadySignedUp');
+            element.className = 'show';
+        </script>
+        <?php
+        die();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +106,7 @@ function getUserData($address){
         <img src="logo/logo2.png" class="logoImage">
         <nav>
             <ul class="clearfix">
-                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+                <a class="view1" href="view1.php?page_num=1&userid=<?php echo ($sUserid); ?>">閲覧画面</a>
                 <a class="login" href="login.php">ログイン</a>
             </ul>
         </nav>
@@ -146,43 +187,3 @@ function getUserData($address){
         form.submit();
     })
 </script>
-<?php
-if($_POST){
-    //echo("ポスト飛んできた");
-    $data = [];
-    $address = $_POST['address'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $data = getUserData($address);
-    //var_dump($data);
-    if(!$data){
-        try {
-            $dbh = dbConnect();
-            $sql = 'INSERT INTO 
-                    user(username, password, address)
-                VALUES
-                    (:username, :password, :address)';
-            $stmt = $dbh->prepare($sql);
-            $stmt->bindValue(':username',$username, PDO::PARAM_STR);
-            $stmt->bindValue(':password',$password, PDO::PARAM_STR);
-            $stmt->bindValue(':address',$address, PDO::PARAM_STR);
-
-            $stmt->execute();
-            $dbh = null;
-            header("Location: registerResult.php");
-        } catch (PDOException $e) {
-            print "エラー:".$e->getMessage()."</br>";
-            die();
-        }
-        die();
-    }else{
-        ?>
-        <script>
-            let element = document.querySelector('#alreadySignedUp');
-            element.className = 'show';
-        </script>
-        <?php
-        die();
-    }
-}
-?>
