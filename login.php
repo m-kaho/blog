@@ -30,7 +30,7 @@ if(isset($_SESSION["isLogin"])){
         <img src="logo/logo2.png" class="logoImage">
         <nav>
             <ul class="clearfix">
-                <a class="view1" href="view1.php?page_num=<?php echo $page; ?>">閲覧画面</a>
+                <a class="view1" href="main.php">メインページ</a>
                 <a class="login" href="login.php">ログイン</a>
             </ul>
         </nav>
@@ -131,10 +131,5 @@ if($_POST){
     }
 }
 ?>
-    <footer>
-    <p id="copy">
-        &copy;beginner's
-    </p>
-    </footer>
 </body>
 </html>
