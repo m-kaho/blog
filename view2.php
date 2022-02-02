@@ -1,8 +1,7 @@
 <?php
-$id=1;
-//if($_GET['post_id']) {
-    //$id = $_GET['post_id'];
-//}
+if($_GET['post_id']) {
+    $id = $_GET['post_id'];
+}
 
 if(empty($id)){
     exit('IDが不正です');
@@ -11,7 +10,7 @@ if(empty($id)){
 function dbConnect(){
 $dsn='mysql:host=localhost;dbname=blog;charset=utf8';
 $user= 'postuser';
-$pass='2021';
+$pass='e2k2021';
 try{
     $dbh =new PDO($dsn,$user,$pass,[
         PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION,
@@ -23,7 +22,7 @@ try{
 }
 return $dbh;
 }
-
+require("pvCounter.php");
 $dbh=dbConnect();
 //SQL準備
 $stmt = $dbh->prepare('SELECT * FROM post Where post_id =:id');
@@ -61,7 +60,7 @@ $dbh=null;
             <img src="logo/logo2.png">
             <nav>
                 <ul class="clearfix">
-                    <a class="view2" href="view1.php?page_num=<?php echo $page; ?>&userid=<?php echo $userId; ?>">閲覧画面</a>
+                <a class="view1" href="main.php">メインページ</a>
                     <a class="login" href="login.php">ログイン</a>
                 </ul>
             </nav>
@@ -96,7 +95,6 @@ $dbh=null;
                         </from>
                 </div>
             </div>
-            <?php var_dump($_SESSION) ?>
             <footer>
                 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
