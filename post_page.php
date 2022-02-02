@@ -17,7 +17,7 @@
         <img src="logo/logo2.png" class="logoImage">
         <nav>
             <ul class="clearfix">
-                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+            <a class="view1" href="main.php">メインページ</a>
                 <?php
                     echo($log);
                 ?>
@@ -93,9 +93,9 @@
             //echo($userid);
             //sql文
             $sql =  'INSERT INTO
-                post(title, content, private, userid)
+                post(title, content, private, userid, pv)
             VALUES
-                (:title, :content, :private, :userid)';
+                (:title, :content, :private, :userid, :pv)';
             //userID
             $user = "postuser";
             //PassWord
@@ -103,6 +103,7 @@
 
             try{
                 //DBに接続
+                $pv = 0;
                 $dbh = new PDO('mysql:host=localhost;dbname=blog', $user, $pass);
                 // $dbh = null;
                 //var_dump($dbh);
@@ -112,6 +113,7 @@
                 $stmt->bindValue(':content',$content, PDO::PARAM_STR);
                 $stmt->bindValue(':private',$private, PDO::PARAM_INT);
                 $stmt->bindValue(':userid',$userid, PDO::PARAM_INT);
+                $stmt->bindValue(':pv',$pv, PDO::PARAM_INT);
                 //DBに書き込み
                 $stmt->execute();
 
