@@ -9,7 +9,7 @@ if($_SESSION["isLogin"]=="true"){
     function dbConnect(){
         $dsn='mysql:host=localhost;dbname=blog;charset=utf8';
         $user= 'postuser';
-        $pass='2021';
+        $pass='e2k2021';
         try{
             return new PDO($dsn,$user,$pass,[
                 PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION,
