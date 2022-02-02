@@ -47,11 +47,12 @@
     <div class="main">
         <h2>更新しました</h2>
         <a class="btn" href="view3.php?page_num=1">戻る</a>
-    </div>    
-    <footer>
-    <p id="copy">
-        &copy;beginner's
-    </p>
-    </footer>
+    </div>
+
 </body>
+<footer>
+        <p id="copy">
+            &copy;beginner's
+        </p>
+    </footer>
 </html>
