@@ -88,7 +88,7 @@ function searchUser(){
         <img src="logo/logo2.png" class="logoImage">
         <nav>
             <ul class="clearfix">
-                <a class="view1" href="view1.php?page_num=1&userid=<?php echo $sUserid; ?>">閲覧画面</a>
+            <a class="view1" href="main.php">メインページ</a>
                 <?php
                     echo($log);
                 ?>
