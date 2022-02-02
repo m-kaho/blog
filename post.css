@@ -104,8 +104,16 @@ button:hover{
     padding: 8px 24px;
     border: solid 4px rgb(226, 147, 0);
 }
-
-/* フッター */
+.btn{
+    color: white;
+    margin-bottom: 20px;
+    background-color: orange;
+    display: inline-flex;
+    padding: 10px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+   
+}
 footer{
     justify-content: space-between;
     position: absolute;/*←絶対位置*/
@@ -114,7 +122,8 @@ footer{
     height: 50px;
     width:100%;
     background-color:#918d8b;
-    color:white;}
+    color:white;
+}
 #copy{
     margin:10px;
     float:right;
