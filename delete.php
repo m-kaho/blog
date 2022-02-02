@@ -99,7 +99,7 @@ if($_POST) {
         <img src="logo/logo2.png" class="logoImage">
         <nav>
             <ul class="clearfix">
-                <a class="view1" href="view1.php?page_num=<?php echo $page; ?>">閲覧画面</a>
+            <a class="view1" href="main.php">メインページ</a>
                 <?php
                     echo($log);
                 ?>
@@ -131,10 +131,10 @@ if(!$data){
             form.submit();
         }, false);
     </script>
-<footer>
-<p id="copy">
-    &copy;beginner's
-</p>
-</footer>
 </body>
+<footer>
+        <p id="copy">
+            &copy;beginner's
+        </p>
+    </footer>
 </html>
