@@ -20,7 +20,7 @@ function dbConnect(){
 function pvPosts(){
     try {
         $dbh = dbConnect();
-        $sql = 'SELECT * FROM post order by pv desc limit 5';
+        $sql = 'SELECT * FROM post WHERE post.private=1 order by pv desc limit 5';
         $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
@@ -53,7 +53,7 @@ function searchPostID($userid){
 //最近の投稿 TOP5をDBから取り出す
 function recentPosts(){
     $dbh = dbConnect();
-    $sql = 'SELECT * FROM post order by post_date desc limit 5';
+    $sql = 'SELECT * FROM post WHERE post.private=1 order by post_date desc limit 5';
     $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
