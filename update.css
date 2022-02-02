@@ -120,14 +120,15 @@ button:hover{
 }
 
 footer{
-    justify-content: space-between;
-    position: absolute;/*←絶対位置*/
-    bottom: 0; /*下に固定*/
     box-sizing: border-box;
     height: 50px;
     width:100%;
     background-color:#918d8b;
     color:white;
+    /*padding:10px;
+    bottom:0;*/
+    position:absolute;
+    bottom:0; 
 }
 #copy{
     margin:10px;
